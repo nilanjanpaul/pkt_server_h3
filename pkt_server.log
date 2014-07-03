@@ -1,0 +1,82 @@
+ INFO 15:42:34.906 - Starting the server at
+ INFO 15:42:34.908 - Starting TCP receiver server at 5102
+ INFO 15:42:34.908 - Starting UDP sender server at 5101
+ INFO 15:42:34.908 - Starting UDP receiver server at 5103
+ INFO 15:42:34.908 - Starting TCP sender server at 5100
+ INFO 16:07:53.573 (main.cpp:562) - Starting the server at
+ INFO 16:07:53.574 (main.cpp:467) - Starting UDP sender server at 5124
+ INFO 16:07:53.574 (main.cpp:432) - Starting TCP sender server at 5123
+ INFO 16:07:53.574 (main.cpp:482) - Starting TCP receiver server at 5125
+ INFO 16:07:53.574 (main.cpp:515) - Starting UDP receiver server at 5126
+ INFO 16:10:24.272 (main.cpp:459) - Tx Thread count: 1
+ INFO 16:10:30.274 (main.cpp:306) - Closing Connection
+ INFO 16:10:30.274 (main.cpp:268) -  TIME = 6001 msec rx/tx/bad packets=0/10952/0 rx/tx bytes=0/15770880 success=0%
+ INFO 16:10:30.274 (main.cpp:345) - Tx Thread count: 0
+ INFO 16:11:29.495 (main.cpp:459) - Tx Thread count: 1
+ INFO 16:11:35.497 (main.cpp:306) - Closing Connection
+ INFO 16:11:35.497 (main.cpp:268) -  TIME = 6000 msec rx/tx/bad packets=0/11030/0 rx/tx bytes=0/15883200 success=0%
+ INFO 16:11:35.497 (main.cpp:345) - Tx Thread count: 0
+ INFO 16:13:06.267 (main.cpp:459) - Tx Thread count: 1
+ INFO 16:13:21.267 (main.cpp:241) - t=15000 msec rx/tx/bad packets=0/25827/0 rx/tx bytes=0/37192320 success=0%
+ INFO 16:13:36.267 (main.cpp:241) - t=30000 msec rx/tx/bad packets=0/52497/0 rx/tx bytes=0/75597120 success=0%
+ INFO 16:13:51.267 (main.cpp:241) - t=45000 msec rx/tx/bad packets=0/79108/0 rx/tx bytes=0/113916960 success=0%
+ INFO 16:14:06.267 (main.cpp:241) - t=60000 msec rx/tx/bad packets=0/105665/0 rx/tx bytes=0/152159040 success=0%
+ INFO 16:14:06.268 (main.cpp:306) - Closing Connection
+ INFO 16:14:06.280 (main.cpp:268) -  TIME = 60012 msec rx/tx/bad packets=0/105666/0 rx/tx bytes=0/152159040 success=0%
+ INFO 16:14:06.280 (main.cpp:345) - Tx Thread count: 0
+ INFO 16:14:36.794 (main.cpp:459) - Tx Thread count: 1
+ INFO 16:14:51.795 (main.cpp:241) - t=15000 msec rx/tx/bad packets=0/27058/0 rx/tx bytes=0/38964960 success=0%
+ INFO 16:15:06.795 (main.cpp:241) - t=30000 msec rx/tx/bad packets=0/54081/0 rx/tx bytes=0/77878080 success=0%
+ INFO 16:15:21.795 (main.cpp:241) - t=45000 msec rx/tx/bad packets=0/81133/0 rx/tx bytes=0/116832960 success=0%
+ INFO 16:15:36.795 (main.cpp:241) - t=60000 msec rx/tx/bad packets=0/108198/0 rx/tx bytes=0/155806560 success=0%
+ INFO 16:15:36.798 (main.cpp:306) - Closing Connection
+ INFO 16:15:36.798 (main.cpp:268) -  TIME = 60002 msec rx/tx/bad packets=0/108199/0 rx/tx bytes=0/155806560 success=0%
+ INFO 16:15:36.798 (main.cpp:345) - Tx Thread count: 0
+ INFO 16:17:27.102 (main.cpp:459) - Tx Thread count: 1
+ INFO 16:17:42.103 (main.cpp:241) - t=15000 msec rx/tx/bad packets=0/27247/0 rx/tx bytes=0/39237120 success=0%
+ INFO 16:17:57.103 (main.cpp:241) - t=30000 msec rx/tx/bad packets=0/54495/0 rx/tx bytes=0/78474240 success=0%
+ INFO 16:18:12.103 (main.cpp:241) - t=45000 msec rx/tx/bad packets=0/81736/0 rx/tx bytes=0/117701280 success=0%
+ INFO 16:18:27.103 (main.cpp:241) - t=60000 msec rx/tx/bad packets=0/109007/0 rx/tx bytes=0/156971520 success=0%
+ INFO 16:18:27.104 (main.cpp:306) - Closing Connection
+ INFO 16:18:27.104 (main.cpp:345) - Tx Thread count: 0
+ INFO 16:18:27.104 (main.cpp:268) -  TIME = 60001 msec rx/tx/bad packets=0/109009/0 rx/tx bytes=0/156972960 success=0%
+ INFO 16:21:42.229 (main.cpp:459) - Tx Thread count: 1
+ INFO 16:21:57.230 (main.cpp:241) - t=15000 msec rx/tx/bad packets=0/27261/0 rx/tx bytes=0/39257280 success=0%
+ INFO 16:22:12.230 (main.cpp:241) - t=30000 msec rx/tx/bad packets=0/54542/0 rx/tx bytes=0/78541920 success=0%
+ INFO 16:22:27.230 (main.cpp:241) - t=45000 msec rx/tx/bad packets=0/81815/0 rx/tx bytes=0/117815040 success=0%
+ INFO 16:22:42.230 (main.cpp:241) - t=60000 msec rx/tx/bad packets=0/109056/0 rx/tx bytes=0/157042080 success=0%
+ INFO 16:22:42.231 (main.cpp:306) - Closing Connection
+ INFO 16:22:42.231 (main.cpp:268) -  TIME = 60000 msec rx/tx/bad packets=0/109058/0 rx/tx bytes=0/157043520 success=0%
+ INFO 16:22:42.231 (main.cpp:345) - Tx Thread count: 0
+ INFO 16:23:33.880 (main.cpp:459) - Tx Thread count: 1
+ INFO 16:23:48.881 (main.cpp:241) - t=15000 msec rx/tx/bad packets=0/27299/0 rx/tx bytes=0/39312000 success=0%
+ INFO 16:24:03.881 (main.cpp:241) - t=30000 msec rx/tx/bad packets=0/54584/0 rx/tx bytes=0/78602400 success=0%
+ INFO 16:24:18.881 (main.cpp:241) - t=45000 msec rx/tx/bad packets=0/81881/0 rx/tx bytes=0/117910080 success=0%
+ INFO 16:24:33.881 (main.cpp:241) - t=60000 msec rx/tx/bad packets=0/109169/0 rx/tx bytes=0/157204800 success=0%
+ INFO 16:24:33.882 (main.cpp:306) - Closing Connection
+ INFO 16:24:33.882 (main.cpp:345) - Tx Thread count: 0
+ INFO 16:24:33.882 (main.cpp:268) -  TIME = 60001 msec rx/tx/bad packets=0/109171/0 rx/tx bytes=0/157206240 success=0%
+ INFO 10:29:57.305 (main.cpp:562) - Starting the server at
+ INFO 10:29:57.307 (main.cpp:467) - Starting UDP sender server at 5101
+ INFO 10:29:57.307 (main.cpp:515) - Starting UDP receiver server at 5103
+ INFO 10:29:57.307 (main.cpp:482) - Starting TCP receiver server at 5102
+ INFO 10:29:57.307 (main.cpp:432) - Starting TCP sender server at 5100
+ INFO 11:18:55.246 (main.cpp:563) - Starting the server at
+ INFO 11:18:55.248 (main.cpp:468) - Starting UDP sender server at 5101
+ INFO 11:18:55.248 (main.cpp:433) - Starting TCP sender server at 5100
+ INFO 11:18:55.248 (main.cpp:516) - Starting UDP receiver server at 5103
+ INFO 11:18:55.248 (main.cpp:483) - Starting TCP receiver server at 5102
+ INFO 13:12:21.942 (main.cpp:563) - Starting the server at
+ INFO 13:12:21.944 (main.cpp:468) - Starting UDP sender server at 5101
+ INFO 13:12:21.944 (main.cpp:433) - Starting TCP sender server at 5100
+ INFO 13:12:21.944 (main.cpp:483) - Starting TCP receiver server at 5102
+ INFO 13:12:21.944 (main.cpp:516) - Starting UDP receiver server at 5103
+ INFO 13:16:16.439 - Starting the server at
+ INFO 13:16:16.440 - Starting TCP receiver server at 5102
+ INFO 13:16:16.440 - Starting TCP sender server at 5100
+ INFO 13:16:16.440 - Starting UDP receiver server at 5103
+ INFO 13:16:16.440 - Starting UDP sender server at 5101
+ INFO 13:22:34.807 - Starting the server at
+ INFO 13:22:34.812 - Starting TCP sender server at 5100
+ INFO 13:22:34.812 - Starting TCP receiver server at 5102
+ INFO 13:22:34.812 - Starting UDP sender server at 5101
