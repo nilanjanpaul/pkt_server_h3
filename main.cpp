@@ -26,145 +26,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include "oml2/omlc.h"
 
 
 namespace po = boost::program_options;
 namespace bt = boost::posix_time;
 
-// =====================================================================================
-// OML definitions
-// =====================================================================================
-
-#define FALSE (unsigned int) 0
-#define TRUE  (unsigned int) 1
-
-class CWriteOML
-{
-
-private:
-
-  unsigned int mMeasurementPoints;
-  unsigned int mHeaderPoints;
-  unsigned int mFFTLength;
-  unsigned int mIdxNull;
-  std::string mHostName;
-
-  OmlMPDef* mp_def;
-  OmlMP* mp;
-
-  void createMeasurementPoint(OmlMPDef* pOmlMPDef, std::string str, OmlValueT type)
-  {
-    char* cptr;
-    if (str == "NULL")
-      {
-        pOmlMPDef->name = NULL;
-        pOmlMPDef->param_types = type;
-
-      }
-    else
-      {
-        cptr = new char[str.size()+1];
-        strcpy (cptr, str.c_str());
-        pOmlMPDef->name = cptr;
-        pOmlMPDef->param_types = type;
-      }
-  }
-
-public:
-
-  CWriteOML()
-  {
-  }
-
-  CWriteOML(std::string db_filename, std::string server_name)
-  {
-    init(db_filename, server_name);
-  }
-
-
-
-  void init(std::string db_filename, std::string server_name)
-  {
-    char chostname[32];
-    std::string fname;
-    int argc;
-    const char** argv;
-
-    for (int i = 0; i < 32;++i)
-      chostname[i] = '\0';
-
-    gethostname(chostname, 31);
-    mHostName = std::string(chostname);
-    std::cerr << mHostName << std::endl;
-
-    
-    argc = 7;
-    //const char* argv_server[] = {"./pkt_server", "--oml-id",(const char*)chostname, "--oml-exp-id",db_filename.c_str(), "--oml-server", server_name.c_str() };
-    const char* argv_server[] = {"./pkt_server", "--oml-id",(const char*)chostname, "--oml-domain",db_filename.c_str(), "--oml-collect", server_name.c_str() };
-        argv = argv_server;
-
-    int result = omlc_init ("pkt_server", &argc, argv, NULL);
-    if (result == -1)
-    {
-      std::cerr << "Could not initialize OML\n";
-      exit (1);
-    }
-  }
-
-  void start(unsigned int points)
-  {
-    int result;
-
-    mIdxNull = mMeasurementPoints = 7;
-
-    // mMeasurementPoints
-    mp_def = new OmlMPDef [(sizeof(OmlMPDef) * (mMeasurementPoints+1) )];
-    createMeasurementPoint(&mp_def[0], "Time_msec",    (OmlValueT)OML_INT32_VALUE);
-    createMeasurementPoint(&mp_def[1], "RxPackets",      (OmlValueT)OML_INT32_VALUE);
-    createMeasurementPoint(&mp_def[2], "TxPackets",      (OmlValueT)OML_INT32_VALUE);
-    createMeasurementPoint(&mp_def[3], "BadPackets",     (OmlValueT)OML_INT32_VALUE);
-    createMeasurementPoint(&mp_def[4], "RxBytes",        (OmlValueT)OML_INT32_VALUE);
-    createMeasurementPoint(&mp_def[5], "TxBytes",        (OmlValueT)OML_INT32_VALUE);
-    createMeasurementPoint(&mp_def[6], "Percentage",     (OmlValueT)OML_INT32_VALUE);
-
-    createMeasurementPoint(&mp_def[mIdxNull], "NULL",        (OmlValueT)0);
-
-    mp = omlc_add_mp ("packet_info", mp_def);
-
-    if (mp == NULL) {
-      std::cerr << "Error: could not register Measurement Point \"packet_info\"";
-      exit (1);
-    }
-
-    result = omlc_start();
-    if (result == -1) {
-      std::cerr << "Error starting up OML measurement streams\n";
-      exit (1);
-    }
-  }
-
-  void insert(int32_t countms, int32_t rxpkt, int32_t txpkt, int32_t badpkt, int32_t rxbyte, int32_t txbyte, int32_t percentage)
-  {
-    OmlValueU values[mMeasurementPoints];
-
-    omlc_set_long (values[0], countms);
-    omlc_set_long (values[1], rxpkt);
-    omlc_set_long (values[2], txpkt);
-    omlc_set_long (values[3], badpkt);
-    omlc_set_long (values[4], rxbyte);
-    omlc_set_long (values[5], txbyte);
-    omlc_set_long (values[6], percentage);
-
-    omlc_inject (mp, values);
-  }
-
-  void stop()
-  {
-    omlc_close();
-  }
-
-};
 
 using boost::asio::ip::tcp;
 using boost::asio::ip::udp;
@@ -206,21 +72,6 @@ void report_fn()
   bt::ptime last_update = bt::microsec_clock::local_time();
   bt::time_duration td;
   float percent = 0;
-
-  // allocate OML resources
-  int oml_mode = 1;
-  CWriteOML OML;
-
-  if ( gOmlFilename.empty() )
-    oml_mode = 0;
-
-
-  if (oml_mode == 1)
-  {
-    //std::string server_name("idb2.orbit-lab.org:3003");
-    OML.init(gOmlFilename, gOmlServer );
-    OML.start(0);
-  }
   
   while(gKillFlag == 0)
     {
@@ -240,10 +91,6 @@ void report_fn()
 	    percent = (float)(gRxBytes) / (float)(gTxBytes) * 100.0f;
 	    td = bt::microsec_clock::local_time() - start_time;
 	    LOG4CXX_INFO(logger, "t=" << td.total_milliseconds() << " msec rx/tx/bad packets=" << gRxGoodPackets << "/" << gTxPackets << "/" << gRxBadPackets << " rx/tx bytes="  << gRxBytes << "/" << gTxBytes << " success=" << percent << "%");
-	    if (oml_mode == 1)
-	    {
-	      OML.insert((int32_t)td.total_milliseconds(), (int32_t)gRxGoodPackets, (int32_t)gTxPackets, (int32_t)gRxBadPackets, (int32_t)gRxBytes, (int32_t)gTxBytes, (int32_t)percent );
-	    }
 	  }
 	  
 	  td = bt::microsec_clock::local_time() - start_time;
@@ -254,10 +101,6 @@ void report_fn()
 	    td = bt::microsec_clock::local_time() - start_time;
 	    LOG4CXX_INFO(logger, " TIME = " << td.total_milliseconds() << " msec rx/tx/bad packets=" << gRxGoodPackets << "/" << gTxPackets << "/" << gRxBadPackets << " rx/tx bytes="  << gRxBytes << "/" << gTxBytes << " success=" << percent << "%");
 
-	    if (oml_mode == 1)
-	    {
-	      OML.insert((int32_t)td.total_milliseconds(), (int32_t)gRxGoodPackets, (int32_t)gTxPackets, (int32_t)gRxBadPackets, (int32_t)gRxBytes, (int32_t)gTxBytes, (int32_t)percent );
-	    }
 	    break;
 	  }
 	}
@@ -268,17 +111,8 @@ void report_fn()
       td = bt::microsec_clock::local_time() - start_time;
       LOG4CXX_INFO(logger, " TIME = " << td.total_milliseconds() << " msec rx/tx/bad packets=" << gRxGoodPackets << "/" << gTxPackets << "/" << gRxBadPackets << " rx/tx bytes="  << gRxBytes << "/" << gTxBytes << " success=" << percent << "%");
       gKillFlag = 0;
-      if (oml_mode == 1)
-      {
-
-	OML.insert((int32_t)td.total_milliseconds(), (int32_t)gRxGoodPackets, (int32_t)gTxPackets, (int32_t)gRxBadPackets, (int32_t)gRxBytes, (int32_t)gTxBytes, (int32_t)percent );
-      }
     }
 
-  if (oml_mode == 1)
-  {
-    OML.stop();
-  }
 
   gRcvSessionKillFlag = 1;
   gTxSessionKillFlag = 1;
