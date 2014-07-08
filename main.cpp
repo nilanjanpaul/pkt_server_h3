@@ -1,11 +1,3 @@
-// Compile syntax:
-// > g++ pkt_server.cpp -lboost_program_options-mt -lboost_thread -o pkt_server
-
-/* A simple server in the internet domain using TCP/UDP to send and receive packets
-   The port number is passed as an argument
-   This version runs forever, forking off 4 separate threads (two for send and
-   two for receive) each of whihc creates a separate thread for each communication)
-*/
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
